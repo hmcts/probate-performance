@@ -4,7 +4,7 @@ properties([
         pipelineTriggers([cron('00 21 * * *')])
 ])
 
-@Library("Infrastructure") _
+@Library("Infrastructure@DTSPO-4533") _
 
 def product = "probate"
 def component = "citizen"
