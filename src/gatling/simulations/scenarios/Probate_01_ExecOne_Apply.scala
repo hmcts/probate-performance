@@ -247,7 +247,7 @@ object Probate_01_ExecOne_Apply {
         .formParam("isSaveAndClose", "false")
         .formParam("nameAsOnTheWill", "optionYes")
         .check(CsrfCheck.save)
-        .check(substring("What was their date of birth")))
+        .check(substring("date of birth")))
 
     }
 
@@ -265,7 +265,7 @@ object Probate_01_ExecOne_Apply {
         .formParam("dob-month", "#{dobMonth}")
         .formParam("dob-year", "#{dobYear}")
         .check(CsrfCheck.save)
-        .check(substring("What was the date that they died")))
+        .check(substring("What was the date that")))
 
     }
 
@@ -302,7 +302,7 @@ object Probate_01_ExecOne_Apply {
         .formParam("addressLine3", "")
         .formParam("postTown", "Perf #{randomString} Town")
         .formParam("newPostCode", "#{postcode}")
-        .formParam("country", "")
+        .formParam("country", "United Kingdom")
         .check(CsrfCheck.save)
         .check(substring("die in England or Wales")))
 
@@ -611,7 +611,7 @@ object Probate_01_ExecOne_Apply {
         .formParam("addressLine3", "")
         .formParam("postTown", "Perf #{randomString} Town")
         .formParam("newPostCode", "#{postcode}")
-        .formParam("country", "")
+        .formParam("country", "United Kingdom")
         .check(CsrfCheck.save)
         .check(substring("Check the original will and codicils now")))
 
@@ -762,7 +762,7 @@ object Probate_01_ExecOne_Apply {
         .formParam("addressLine3", "")
         .formParam("postTown", "Perf #{randomString} Town")
         .formParam("newPostCode", "#{postcode}")
-        .formParam("country", "")
+        .formParam("country", "United Kingdom")
         //PCQ (Equality/diversity survey) might pop up at this point, so cater for either outcome in the text check
         .check(regex("Give details about the executors(?s).*?<span class=.govuk-tag task-completed.>Completed</span>|Equality and diversity questions")))
 

@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import ccd._
 
-object Probate_04_CW_IssueGrant {
+object CW_IssueGrant {
 
   val CaseWorkerUserFeeder = csv("CWUserData.csv").circular
 

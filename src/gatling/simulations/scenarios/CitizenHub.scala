@@ -6,7 +6,7 @@ import utils.Environment
 
 import scala.concurrent.duration._
 
-object Probate_05_ExecOne_CitizenHub {
+object CitizenHub {
 
   val BaseURL = Environment.baseURL
 
@@ -28,5 +28,18 @@ object Probate_05_ExecOne_CitizenHub {
     }
 
     .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
+
+  val IntestacyCitizenHub =
+
+    group("Intestacy_600_LoadCitizenHub") {
+
+      exec(http("LoadCitizenHub")
+        .get(BaseURL + "/get-case/#{caseId}?probateType=INTESTACY")
+        .headers(CommonHeader)
+        .check(substring("hmcts-progress-bar__icon--complete").count.in(1, 3))) //Application received or Grant Issued
+
+    }
+
+      .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
 
 }

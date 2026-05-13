@@ -30,7 +30,7 @@ object Login {
         .formParam("selfRegistrationEnabled", "true")
         .formParam("_csrf", "#{csrf}")
         .check(regex("Apply for probate|Probate applications"))
-        .check(regex("a href=./get-case/([0-9]+).probateType=PA").optional.saveAs("caseId")))
+        .check(regex("a href=./get-case/([0-9]+).probateType=(?:PA|INTESTACY)").optional.saveAs("caseId")))
     }
 
     .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
