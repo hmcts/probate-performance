@@ -7,7 +7,7 @@ import utilities.{DateUtils, StringUtils}
 
 import scala.concurrent.duration._
 
-object Probate_Caveat {
+object Caveat {
 
   val BaseURL = Environment.baseURL
   val PaymentURL = Environment.paymentURL
@@ -20,7 +20,7 @@ object Probate_Caveat {
 
   val postcodeFeeder = csv("postcodes.csv").random
 
-  val ProbateCaveat =
+  val LodgeCaveat =
 
     exec(_.setAll("randomString" -> StringUtils.randomString(5),
       "dobDay" -> DateUtils.getRandomDayOfMonth(),
@@ -101,7 +101,7 @@ object Probate_Caveat {
         .formParam("addressLine3", "")
         .formParam("postTown", "Perf #{randomString} Town")
         .formParam("newPostCode", "#{postcode}")
-        .formParam("country", "")
+        .formParam("country", "United Kingdom")
         .check(CsrfCheck.save)
         .check(substring("full name of the person")))
 
@@ -169,7 +169,7 @@ object Probate_Caveat {
         .formParam("addressLine3", "")
         .formParam("postTown", "Perf #{randomString} Town")
         .formParam("newPostCode", "#{postcode}")
-        .formParam("country", "")
+        .formParam("country", "United Kingdom")
         .check(CsrfCheck.save)
         .check(substring("English and Welsh")))
 
