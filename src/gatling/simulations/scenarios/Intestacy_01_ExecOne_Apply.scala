@@ -149,7 +149,7 @@ object Intestacy_01_ExecOne_Apply {
         .headers(PostHeader)
         .formParam("_csrf", "#{csrf}")
         .formParam("isSaveAndClose", "false")
-        .formParam("related", "optionYes")
+        .formParam("related", "optionChild")
         .check(substring("Complete these steps")))
 
     }
