@@ -19,21 +19,26 @@ object Login {
 
   val ProbateLogin =
 
-    group("Probate_000_Login") {
-      exec(http("Login")
-        .post(IdamURL + "/login?ui_locales=en&response_type=code&state=#{state}&client_id=probate&redirect_uri=" + BaseURL + "/oauth2/callback")
-        .headers(CommonHeader)
-        .headers(PostHeader)
-        .formParam("username", "#{emailAddress}")
-        .formParam("password", "#{password}")
-        .formParam("save", "Sign in")
-        .formParam("selfRegistrationEnabled", "true")
-        .formParam("_csrf", "#{csrf}")
-        .check(regex("Apply for probate|Probate applications"))
-        .check(regex("a href=./get-case/([0-9]+).probateType=(?:PA|INTESTACY)").optional.saveAs("caseId")))
-    }
 
-    .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
+      group("Probate_000_Login") {
+        exec(http("Probate Login_Email")
+          .post(IdamURL + "/enter-email")
+          .headers(CommonHeader)
+          .formParam("email", "#{emailAddress}")
+          .formParam("_csrf", "#{csrf}")
+          .check(substring("Enter your password")))
+      }
+      .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
 
-
+      group("Probate_001_Login_Password") {
+        exec(http("Probate Login_Password")
+          .post(IdamURL + "/enter-password")
+          .headers(CommonHeader)
+          .formParam("action", "_submit")
+          .formParam("password", "#{password}")
+          .formParam("_csrf", "#{csrf}")
+          .check(regex("Apply for probate|Probate applications"))
+          .check(regex("a href=./get-case/([0-9]+).probateType=(?:PA|INTESTACY)").optional.saveAs("caseId")))
+      }
+      .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
 }

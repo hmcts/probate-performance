@@ -28,12 +28,20 @@ object Homepage {
         .get(BaseURL + "/")
         .headers(CommonHeader)
         .header("sec-fetch-site", "none")
-        .check(regex("state=([a-z0-9-]+)&client").saveAs("state"))
-        .check(CsrfCheck.save)
         .check(substring("Sign in or create an account")))
 
     }
 
-    .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
+     .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
+
+     .group("Probate_002_ClickSignIn") {
+       exec(http("Probate_001_010_ClickSignIn")
+         .get(IdamURL + "/sign-in-or-create")
+         .headers(CommonHeader)
+         .header("sec-fetch-site", "same-origin")
+         .check(status.is(200)))
+     }
+
+     .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
 
 }
