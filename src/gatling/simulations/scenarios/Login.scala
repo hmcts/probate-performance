@@ -28,7 +28,7 @@ object Login {
     }
 
     .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
-  
+
     .group("Probate_002_Login_EnterEmail") {
       exec(http("Probate Login Enter Email")
         .post(IdamURL + "/enter-email")
@@ -38,10 +38,10 @@ object Login {
         .check(CsrfCheck.save)
         .check(substring("Enter your password")))
     }
-  
+
     .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
 
-    group("Probate_003_Login_EnterPassword") {
+    .group("Probate_003_Login_EnterPassword") {
       exec(http("Probate Login Enter Password")
         .post(IdamURL + "/enter-password")
         .headers(CommonHeader)
@@ -51,6 +51,6 @@ object Login {
         .check(regex("Apply for probate|Probate applications"))
         .check(regex("a href=./get-case/([0-9]+).probateType=(?:PA|INTESTACY)").optional.saveAs("caseId")))
     }
-  
+
     .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
 }
