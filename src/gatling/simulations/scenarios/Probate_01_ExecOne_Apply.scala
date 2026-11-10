@@ -433,7 +433,23 @@ object Probate_01_ExecOne_Apply {
         .formParam("isSaveAndClose", "false")
         .formParam("alias", "optionNo")
         .check(CsrfCheck.save)
-        .check(substring("get married or form a civil partnership")))
+        .check(substring("marital status at the time of their death")))
+
+    }
+
+    .pause(MinThinkTime.seconds, MaxThinkTime.seconds)
+
+    .group("Probate_205_MaritalStatusSubmit") {
+
+      exec(http("MaritalStatusSubmit")
+        .post(BaseURL + "/deceased-marital-status")
+        .headers(CommonHeader)
+        .headers(PostHeader)
+        .formParam("_csrf", "#{csrf}")
+        .formParam("isSaveAndClose", "false")
+        .formParam("maritalStatus", "optionMarried")
+        .check(CsrfCheck.save)
+        .check(substring("after the will was signed")))
 
     }
 
